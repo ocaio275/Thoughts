@@ -4,7 +4,7 @@ const db = require('../DB/conn')
 
 const User = db.define('User', {
     name: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         require: true
     },
     email: {
