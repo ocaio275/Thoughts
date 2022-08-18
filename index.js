@@ -13,6 +13,13 @@ const Thought = require('./Models/Thought')
 const User = require('./Models/User')
 // ---FIM--- //
 
+// --- Controller ---/
+const ThoughtController = require('./Controllers/ThoughtController')
+// ---FIM--- //
+
+// --- Importando Routes--- //
+const ThoughtsRoutes = require('./Routes/thoughtsRoutes')
+// ---FIM--- //
 // ---Configurando template engine--- //
 app.engine('handlebars', exphbs.engine())
 app.set('view engine', 'handlebars')
@@ -60,11 +67,15 @@ app.use(express.static('Public'))
 
 // ---Set session to res--- //
 app.use((req, res, next)=>{
-    if(res.session.userid){
+    if(req.session.userid){
         res.locals.session = req.session
     }
     next()
 })
+
+app.use('/thoughts', ThoughtsRoutes)
+
+// app.get('/', ThoughtController.showAll)
 conn
     .sync()
     .then(() => {
