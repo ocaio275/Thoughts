@@ -15,10 +15,12 @@ const User = require('./Models/User')
 
 // --- Controller ---/
 const ThoughtController = require('./Controllers/ThoughtController')
+const AuthController = require('./Controllers/AuthController')
 // ---FIM--- //
 
 // --- Importando Routes--- //
 const ThoughtsRoutes = require('./Routes/thoughtsRoutes')
+const AuthRoutes = require('./Routes/authRoutes')
 // ---FIM--- //
 // ---Configurando template engine--- //
 app.engine('handlebars', exphbs.engine())
@@ -74,8 +76,8 @@ app.use((req, res, next)=>{
 })
 
 app.use('/thoughts', ThoughtsRoutes)
-
-// app.get('/', ThoughtController.showAll)
+app.use('/', AuthRoutes)
+app.get('/', ThoughtController.showThoughts)
 conn
     .sync()
     .then(() => {
