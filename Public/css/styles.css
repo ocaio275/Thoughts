@@ -45,6 +45,68 @@
     min-height: 60vh;
     padding: 2em;
 }
+
+/*LOGIN E REGISTER*/
+.auth-container{
+    max-width: 450px;
+    margin:0 auto;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.auth-container h2{
+    margin-bottom: 1em;
+    color: #fff;
+    border-left: 4px solid #f6982d;
+    padding: .3em;
+    width: 100px;
+}
+
+.auth-container a{
+    color: #f6982d;
+}
+
+.form-control{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+
+}
+
+.form-control label{
+    font-weight: bold;
+    margin-bottom: .5em;
+
+}
+
+.form-control input,
+.form-control textarea{
+    padding: 7px;
+    border-radius: 3px;
+    border: 1px solid #f6982d;
+}
+
+form input[type='submit'],
+.btn{
+    background-color: transparent;
+    color: #f6982d;
+    border: 2px solid #f6982d;
+    padding: .5em 1.2em;
+    margin-bottom: 1em;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: .5s;
+}
+
+form input[type='submit']:hover,
+.btn:hover{
+    background-color: #f6982d;
+    color: #fff;
+}
 /*FOOTER*/
 footer{
     height: 150px;
