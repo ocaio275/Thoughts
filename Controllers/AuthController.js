@@ -6,6 +6,19 @@ module.exports = class AuthController {
         res.render('auth/login')
     }
 
+    static async loginPost(req, res) {
+        const { email, password } = req.body
+
+        const findUser = await User.findOne({ where: { email: email } })
+
+        if(!findUser){
+            req.flash('message', 'Usuário não encontrado!!!')
+            res.render('auth/login')
+            return
+        }
+
+    }
+
     static register(req, res) {
         res.render('auth/register')
     }
@@ -59,8 +72,8 @@ module.exports = class AuthController {
         }
 
     }
-    
-    static async logout(req, res){
+
+    static async logout(req, res) {
         req.session.destroy()
         res.redirect('/login')
     }
