@@ -46,6 +46,19 @@
     padding: 2em;
 }
 
+/* MESSAGE */
+
+.message{
+    padding: 1em;
+    color: #004085;
+    background-color: #cce5ff;
+    border: 1px solid #b8daff;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 auto 2em;
+    max-width: 60%;
+}
+
 /*LOGIN E REGISTER*/
 .auth-container{
     max-width: 450px;
