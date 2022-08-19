@@ -4,4 +4,9 @@
         <a href="/thoughts/add" class="btn"> Criar pensamentos</a>        
     </div>
     <h3>Seus pensamentos</h3>
+    <ul>
+        {{#each thoughts}}
+            <li>{{this.title}}</li>
+        {{/each}}
+    </ul>
 </div>

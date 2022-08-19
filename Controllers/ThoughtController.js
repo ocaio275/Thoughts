@@ -7,14 +7,31 @@ module.exports = class ThoughtController {
     }
 
     static async dashboard(req, res) {
-        res.render('thoughts/dashboard')
+
+        const userId = req.session.userid
+
+        const checkUser = await User.findOne({
+            where: {
+                id: userId
+            },
+            include: Thought,
+            plain: true,
+        })
+
+        if (!checkUser) {
+            res.redirect('/login')
+        }
+
+        const thoughts = checkUser.Thoughts.map((result) => result.dataValues)
+
+        res.render('thoughts/dashboard', { thoughts })
     }
 
     static createThought(req, res) {
         res.render('thoughts/create')
     }
     static async createThoughtSave(req, res) {
-        
+
 
         const thought = {
             title: req.body.title,
