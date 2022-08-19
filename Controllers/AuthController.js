@@ -11,12 +11,30 @@ module.exports = class AuthController {
 
         const findUser = await User.findOne({ where: { email: email } })
 
-        if(!findUser){
+        if (!findUser) {
             req.flash('message', 'Usuário não encontrado!!!')
             res.render('auth/login')
             return
         }
 
+        const checkPassword = bcrypt.compareSync(password, findUser.password)
+
+        if (!checkPassword) {
+            req.flash('message', 'Senha incorreta!')
+            res.render('auth/login')
+            return
+        }
+
+        try {
+            req.session.userid = findUser.id
+
+            req.flash('message', 'Autenticação realizada com sucesso!')
+            req.session.save(()=>{
+                res.redirect('/')
+            })
+        } catch (error) {
+            console.log("🚀 ~ file: AuthController.js ~ line 31 ~ AuthController ~ loginPost ~ error", error)
+        }
     }
 
     static register(req, res) {
