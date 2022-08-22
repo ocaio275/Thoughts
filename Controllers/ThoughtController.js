@@ -27,6 +27,20 @@ module.exports = class ThoughtController {
         res.render('thoughts/dashboard', { thoughts })
     }
 
+    static async removeThought(req, res) {
+        const id = req.body.id
+        const UserId = req.session.userid
+        try {
+            await Thought.destroy({ where: { id: id, UserId: UserId } })
+            req.flash('message', 'Pensamento removido com sucesso!')
+
+            req.session.save(()=>{
+                res.redirect('/thoughts/dashboard')
+            })
+        } catch (error) {
+            console.log("🚀 ~ file: ThoughtController.js ~ line 36 ~ ThoughtController ~ removeThought ~ error", error)
+        }
+    }
     static createThought(req, res) {
         res.render('thoughts/create')
     }
