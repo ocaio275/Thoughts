@@ -26,7 +26,7 @@ module.exports = class ThoughtController {
 
         let emptyThoughts = false
 
-        if(thoughts.length === 0){
+        if (thoughts.length === 0) {
             emptyThoughts = true
         }
 
@@ -69,5 +69,30 @@ module.exports = class ThoughtController {
             console.log("🚀 ~ file: ThoughtController.js ~ line 32 ~ ThoughtController ~ createThoughtSave ~ error", error)
         }
 
+    }
+
+    static async updateThought(req, res) {
+        const id = req.params.id
+        const thought = await Thought.findOne({ raw: true, where: { id: id } })
+        res.render('thoughts/edit', { thought })
+        console.log(thought)
+    }
+    static async updateThoughtSave(req, res) {
+        const { id, title } = req.body
+        const thought = {
+            title
+        }
+
+        try {
+            await Thought.update(thought,{ where: { id: id } })
+
+            req.flash('message', 'Pensamento atualizando com sucesso!!!')
+
+            req.session.save(() => {
+                res.redirect('/thoughts/dashboard')
+            })
+        } catch (error) {
+            console.log("🚀 ~ file: ThoughtController.js ~ line 95 ~ ThoughtController ~ updateThoughtSave ~ error", error)
+        }
     }
 }
