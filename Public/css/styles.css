@@ -169,7 +169,7 @@ form input[type='submit']:hover,
     justify-content: space-between; 
 }
 
-.dashboard.label{
+.dashboard .label{
     font-weight: bold;
     color: #f6982d;
     margin-right: 2em;
@@ -183,6 +183,10 @@ form input[type='submit']:hover,
     color: #fff;
     border-color: #fff;
     margin: 0 .5em;
+}
+
+.dashboard a{
+    color: #f6982d;
 }
 /*FOOTER*/
 footer{
