@@ -3,7 +3,14 @@ const User = require('../Models/User')
 
 module.exports = class ThoughtController {
     static async showThoughts(req, res) {
-        res.render('thoughts/home')
+
+            const thoughtData = await Thought.findAll({
+                include: User,
+            })
+
+        const thoughts = thoughtData.map((result) => result.get({ plain: true }))
+
+        res.render('thoughts/home', { thoughts })
     }
 
     static async dashboard(req, res) {
@@ -84,7 +91,7 @@ module.exports = class ThoughtController {
         }
 
         try {
-            await Thought.update(thought,{ where: { id: id } })
+            await Thought.update(thought, { where: { id: id } })
 
             req.flash('message', 'Pensamento atualizando com sucesso!!!')
 
